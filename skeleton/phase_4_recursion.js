@@ -38,10 +38,16 @@ let exponentV2 = (base,exp) => {
 
 
 function fibonacci(n){
-    if(n < 2){ return [1];}
-    if(n === 0){ return [0];}
-    return  [n].concat(fibonacci(n-2));
+    if(n === 0) {return [0];}
+    if(n === 1) {return [1];}
+    if(n === 2) {return [1,1];}
+    
+    let fib = fibonacci(n-1);
+    let len = fib.length;
+    fib.push(fib[len-1] + fib[len-2])
+
+    return fib;
 }
 
-console.log(fibonacci(5))
+console.log(fibonacci(6))
 
