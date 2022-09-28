@@ -18,21 +18,28 @@ Array.prototype.myMap = function(callback) {
   return newArr;
 }
 
-Array.prototype.myReduce = function(callback = null, initial_value= 0){
-  if(callback === null){
+Array.prototype.myReduce = function(callback, initialValue){
+  let arr;
+  if(callback === undefined){
       callback = el => el
   }
-  let acc = initial_value
+  if(initialValue === undefined){
+    initialValue = this[0];
+    arr = this.slice(1);
+  }else{
+     arr = this;
+  }
+  let acc = initialValue
   arr.myEach((ele) => {
-      acc = acc + callback(ele);
+      acc = callback(acc,ele);
   })
   return acc
 }
 
-function sum(val) {
-  return val;
+function sub(val1,val2){
+  return val1 - val2
 }
 
 
-let arr = [1,2,3,4].myReduce(sum);
+let arr = [1,1,3,4].myReduce(1);
 console.log(arr);
